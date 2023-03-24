@@ -7,6 +7,7 @@ session_start();
 <?php
 
 require_once('content/traitements/access.php');
+require('content/traitements/traitement_card.php')
 
 ?>
 
@@ -16,12 +17,14 @@ require_once('content/traitements/access.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/dist/output.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <title>Accueil</title>
 </head>
 
-<body class="bg-[#BBBBBB] bg-fixed bg-[url('asset/img/bg1.png')]">
+<body class="bg-[#BBBBBB] mt-0 bg-fixed bg-[url('asset/img/bg.png')] bg-cover bg-no-repeat">
 
 <?php
 
@@ -29,8 +32,18 @@ require_once('content/traitements/access.php');
 
 ?>
 
-<div class="bg-[#FDD835]/80 p-4">
-  <h2 class="text-white text-center text-xl p-4 md:text-3xl lg:text-3xl xl:text-3xl animate-pulse">"Plongez dans l'univers du cinéma<br>en un clic !"</h2>
+<div class="bg-[#FDD835]/70 p-4">
+
+  <?php if(isset($_SESSION['pseudo'])) { ?>
+
+    <span class="flex text-white justify-center font-extralight mt-2"><?php echo $_SESSION['pseudo'] .' '. 'Vous étes connecté' ?></span>
+
+  <?php
+    }
+  ?>
+  
+  <h2 class="text-white text-center text-xl p-4 md:text-2xl lg:text-3xl xl:text-3xl animate-pulse">"Plongez dans l'univers du cinéma<br>en un clic !"</h2>
+
 </div>
 
 <div
@@ -46,15 +59,15 @@ require_once('content/traitements/access.php');
       data-te-carousel-active>
       <img
         src="asset/img/la-cite-des-enfants-perdus-infos.jpeg"
-        class="block w-full h-[300px] lg:h-[400px] xl:h-[500px]"
-        alt="Wild Landscape" />
+        class="block w-full h-[300px] lg:h-[400px] xl:h-[600px]"
+        alt="Wild Landscape"/>
     </div>
     <div
       class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
       data-te-carousel-item>
       <img
         src="asset/img/image.jpg"
-        class="block w-full h-[300px] lg:h-[400px] xl:h-[500px]"
+        class="block w-full h-[300px] lg:h-[400px] xl:h-[600px]"
         alt="Camera" />
     </div>
     <div
@@ -62,9 +75,19 @@ require_once('content/traitements/access.php');
       data-te-carousel-item>
       <img
         src="asset/img/uma.jpg"
-        class="block w-full h-[300px] lg:h-[400px] xl:h-[500px]"
+        class="block w-full h-[300px] lg:h-[400px] xl:h-[600px]"
         alt="Exotic Fruits" />
     </div>
+
+    <div
+      class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+      data-te-carousel-item>
+      <img
+        src="asset/img/delicat.jpg"
+        class="block w-full h-[300px] lg:h-[400px] xl:h-[600px]"
+        alt="Exotic Fruits" />
+    </div>
+
   </div>
   <button
     class="absolute top-0 bottom-0 left-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
@@ -123,13 +146,27 @@ require_once('content/traitements/access.php');
 
 <h2 class="flex justify-center text-white text-2xl mb-12 md:text-3xl lg:text-3xl mt-12 xl:text-4xl"> Derniers ajouts </h2>
 
-<div class="bg-white/75 p-8 m-16 pt-2 rounded md:m-20 lg:mx-32 xl:mx-80 mt-2">
+<div class="md:grid md:grid-cols-3 md:grid-rows-2 md:m-16 gap-4">
 
-  <h3 class="text-center mb-4 text-xl md:text-2xl mb-6 lg:text-2xl xl:text-3xl mt-4 p-2 mb-5">Titre trailer</h3>
-  <img class="md:px-20 lg:px-20  xl:pt-0" src="asset/img/affiche.jpg"</img>
-  <h3 class="text-center p-4">Synopsis</h3>
-  <a class="flex text-white bg-[#FDD835]/90 justify-center mx-4 py-1 rounded-full hover:bg-black md:mx-24 md:py-4 lg:mx-48 lg:py-4" href="/trailery/content/pages/film">Regarder&nbsp;le&nbsp;Trailer</a>
+<?php foreach ($films as $film) {
+?>
+
+  <div class="bg-white/75 p-8 m-12 pt-2 rounded md:m-2 md: lg:m-4 xl:">
+
+    <h3 class="text-center mb-4 text-xl md:text-base md:mb-6 lg:text-xl xl:mt-2"><?php echo utf8_encode($film['titre']); ?></h3>
+    <div class="flex justify-center h-[240px] md:h-[160px] lg:justify-center lg:mb-4">
+      <img class="object-contain md:px-2 lg:px-4 xl:pt-0 " src="<?php echo $film['image'];?>"</img>
+    </div>
+    <!--<p class="p-4 mb-2 md:text-sm md:line-clamp-6 xl:p-0"><?php echo utf8_encode($film['synopsis']);?></p>-->
+    <p class="p-4 mb-2 md:text-sm md:line-clamp-6 xl:p-0"><?php echo utf8_encode(substr($film['synopsis'], 0, 80)); ?></p>
+    <a class="flex text-white bg-[#FDD835]/90 justify-center mx-2 py-1 rounded-full hover:bg-black md:mx-0 md:text-xs md:py-2 lg:mx-4 lg:bottom-0 lg:py-4 xl:mx-20" href="/trailery/content/pages/film">Regarder&nbsp;le&nbsp;Trailer</a>
   
+  </div>
+
+<?php
+}
+?>
+
 </div>
 
 <button id="back-to-top" class="hidden fixed bottom-20 right-10 bg-[#FDD835]/90 text-white py-2 px-4 rounded-full transition-opacity duration-300">

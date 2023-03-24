@@ -3,6 +3,7 @@ $host = "localhost"; // l'hôte de la base de données
 $db_name = "trailery"; // le nom de la base de données
 $username = "root"; // le nom d'utilisateur de la base de données
 $password = ""; // le mot de passe de la base de données
+$charset = 'utf8mb4'; //decoder le caracteres spéciaux (?)
 
 $options = [
     \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,

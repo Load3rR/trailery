@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <title>Inscription</title>
 </head>
-<body class="bg-[#BBBBBB] bg-fixed bg-[url('../../asset/img/bg1.png')]">
+<body class="bg-[#BBBBBB] bg-fixed bg-[url('../../asset/img/bg.png')] bg-cover bg-no-repeat">
 
 <?php
 

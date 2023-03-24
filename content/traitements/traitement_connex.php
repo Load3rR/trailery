@@ -16,13 +16,12 @@ if (isset($_POST['submit'])) {
         $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE mail=?");//stmt va chercher les données de ma table
         $stmt->execute([$email]);//execute va comparer mon input a ma table pour voir si il existe
         $user = $stmt->fetch();//ce que fetch va chercher ds statement (fait la requete entre la table et l'input) et attribue à $user
-
         if ($user) { // si l'utilisateur existe
             //$hash = password_hash($password, PASSWORD_DEFAULT);//haché le mot de passe
-            if (password_verify($password, $user['password'])) { // vérifier si le mot de passe correspond
+            if (password_verify($password, $user['mdp'])) { // vérifier si le mot de passe correspond
                 $_SESSION['email'] = $email;
                 $_SESSION['pseudo'] = $user['pseudo'];
-                header("Location: ../index.php");
+                header("Location: ../../index.php");
                 exit();
             } else {
                 header("Location: /trailery/content/form/connection.php?error=wrongpassword");

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <title>Inscription</title>
 </head>
-<body class="bg-[#BBBBBB] bg-fixed bg-[url('../../asset/img/bg1.png')]">
+<body class="bg-[#BBBBBB] bg-fixed bg-[url('../../asset/img/bg.png')] bg-cover bg-no-repeat">
 
 <?php
 
@@ -40,7 +40,7 @@
 	</form>
 </div>    
 
-    <footer class=" flex bg-black p-4 items-center place-content-around absolute right-0 left-0 bottom-0">
+    <footer class=" flex bg-black p-4 items-center place-content-around right-0 left-0 bottom-0">
     
     <img class="w-16 py-4 object-contain" src="../../asset/img/logosantitre.png"</img>
 

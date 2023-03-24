@@ -8,11 +8,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <title>Inscription</title>
 </head>
-<body class="bg-[#BBBBBB] bg-fixed bg-[url('../../asset/img/bg1.png')]">
+<body class="bg-[#BBBBBB] bg-fixed bg-[url('../../asset/img/bg.png')] bg-cover bg-no-repeat">
 
 <?php
 
+    require_once('../../content/traitements/access.php');
     include '../../header.php';
+    require('../traitements/traitement_card.php')
 
 ?>
 
@@ -33,15 +35,22 @@
 </div>
 
 <div>
+
+<?php foreach ($films as $film) {
+?>
+
 <div class="bg-white/75 p-8 m-16 pt-2 rounded md:m-20 md:mt-2 lg:mx-32 lg:mt-2 xl:mx-80 xl:mt-2">
 
-<h3 class="text-center mb-4 text-xl md:text-2xl mb-6 lg:text-2xl xl:text-3xl mt-4 p-2 mb-5">Titre trailer</h3>
-<img class="md:px-20 lg:px-20  xl:pt-0" src="../../asset/img/affiche.jpg"</img>
-<h3 class="text-center p-4">Synopsis</h3>
+<h3 class="text-center mb-4 text-xl md:text-2xl mb-6 lg:text-2xl xl:text-3xl mt-4 p-2 mb-5"><?php echo utf8_encode($film['titre']); ?></h3>
+<img class="md:px-20 lg:px-20  xl:pt-0" src="<?php echo $film['image']; ?>"</img>
+<h3 class="text-center p-4"><?php echo utf8_encode($film['synopsis']); ?></h3>
 <a class="flex text-white bg-[#FDD835]/90 justify-center mx-4 py-1 rounded-full hover:bg-black md:mx-24 md:py-4 lg:mx-48 lg:py-4" href="/trailery/content/pages/film">Regarder&nbsp;le&nbsp;Trailer</a>
 <a class="flex justify-end text-xl mt-4 drop-shadow-md md:text-2xl xl:text-3xl" href=""><i class="bi bi-plus-circle"></i></a>
 
 </div>
+
+<?php
+} ?>
 
 <footer class=" flex bg-black p-4 items-center place-content-around">
   
