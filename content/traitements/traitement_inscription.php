@@ -56,7 +56,11 @@ $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 // Insérer l'utilisateur dans la base de données
 $stmt = $pdo->prepare("INSERT INTO utilisateur (nom, mail, pseudo, mdp) VALUES (?, ?, ?, ?)");
 $stmt->execute([$nom, $email, $pseudo, $hashed_password]);
+//mettre la derniere id entree en bdd ds la variable $idnew 
+$idNew = $pdo->lastInsertId();
 
+$stmt = $pdo->prepare("INSERT INTO role_utilisateur (Id_user, Id_role) VALUES (?, ?)");
+$stmt->execute([$idNew, 2]);
 // Rediriger l'utilisateur vers la page de connexion
 header("Location: ../../index.php?success=inscription");
 exit();
@@ -64,3 +68,7 @@ exit();
 }
 
 ?>
+
+//                      $sql = "SELECT utillisateur.Id_user
+                        FROM utillisateur INNER JOIN role_utilisateur ON utillisateur.Id_user = role_utilisateur.Id_user 
+                        WHERE utillisateur.Id_user = ?";

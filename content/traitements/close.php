@@ -1,5 +1,5 @@
 <?php
 
-    $db = null;
+    $pdo = null;
 
 ?>

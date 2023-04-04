@@ -42,7 +42,7 @@ session_start();
 	</form>
 </div>
 
-<a class="flex text-white justify-center mb-6" href="/trailery/content/form/Incription.php">Ou inscrivez vous</a>
+<a class="flex text-white justify-center mb-16" href="/trailery/content/form/Incription.php">Ou inscrivez vous</a>
 
 <button id="back-to-top" class="hidden fixed bottom-20 right-10 bg-[#FDD835]/90 text-white py-2 px-4 rounded-full transition-opacity duration-300">
   <i class="bi bi-arrow-up-circle-fill text-black"></i>

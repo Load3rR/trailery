@@ -11,24 +11,35 @@
 <body class="bg-[#BBBBBB] bg-fixed bg-[url('../../asset/img/bg.png')] bg-cover bg-no-repeat">
 
 <?php
-
+    session_start();
+    var_dump($_SESSION);
     include '../../header.php';
+    require_once('../traitements/access.php');
+    //recupere l'id dans l'url ($GET) et la fout ds $id
+    $id = $_SESSION['Id_user'];
+    //prepare tous (*) les champs de la table film la ou id_films est egal à $id qui est la variable qui recupere l'id ds l'url
+    $sql = $pdo->prepare("SELECT * FROM utilisateur WHERE Id_user=?");
+    //execute la req a partir de l'id ds l'url
+    $sql->execute([$id]);
+    //va chercher les data du film et les fout ds $data fetchAll prends ttes les entrées et tous les champs
+    $data = $sql->fetch();
+    var_dump($data);
 
 ?>
 
 <h1 class="text-center text-white p-4 md:text-xl xl:text-3xl">Mon compte</h1>
 
 <div class="bg-white/80 mx-6 mb-6 rounded md:m-20 md:mt-2 md:mb-2 lg:mx-32 xl:mx-80">
-    <form class="grid mx-28 py-px  justify-center" action="" method="POST">
+    <form class="grid mx-28 py-px  justify-center" action="../traitements/traitement_compte.php" method="POST">
 		
         <label class="label1 my-2" for="nom">Nom :</label>
-		<input class="py-px mb-2" type="text" name="nom" id="nom">
+		<input class="py-px mb-2" type="text" name="nom" id="nom" value="<?php echo $data['nom']; ?>">
     
         <label class="label1 my-2" for="email">Email :</label>
-		<input class="py-px mb-2" type="email" name="email" id="email">
+		<input class="py-px mb-2" type="email" name="email" id="email" value="<?php echo $data['mail']; ?>">
 
         <label class="label1 my-2" for="pseudo">Pseudo :</label>
-		<input class="py-px mb-2" type="text" name="pseudo" id="pseudo">
+		<input class="py-px mb-2" type="text" name="pseudo" id="pseudo" value="<?php echo $data['pseudo']; ?>">
 
 		<label class="label1 my-2" for="password">Mot de passe :</label>
 		<input class="py-px mb-2" type="password" name="password" id="password">
@@ -36,7 +47,7 @@
 		<label class="label1 my-2" for="repeat_password">Répéter le mot de passe :</label>
 		<input class="py-px mb-2" type="password" name="repeat_password" id="repeat_password">
 
-		<input class="bg-black/90 mx-6 my-6 rounded py-2 text-white" type="submit" name="submit" value="S'inscrire">
+		<input class="bg-black/90 mx-6 my-6 rounded py-2 text-white" type="submit" name="submit" value="Modifier">
 	</form>
 </div>
 
@@ -44,7 +55,7 @@
 
 <div class="bg-white/75 p-4 m-6 pt-2 rounded md:m-20 md:mt-2 lg:mx-32 lg:mt-2 xl:mx-80 xl:mt-2">
 
-    <h3 class="text-center mb-4 text-xl md:text-2xl mb-6 lg:text-2xl xl:text-3xl mt-4 p-2 mb-5">Titre trailer</h3>
+    <h3 class="text-center mb-4 text-xl md:text-2xl md:mb-6 lg:text-2xl xl:text-3xl mt-4 p-2 xl:mb-5">Titre trailer</h3>
     <img class="md:px-20 lg:px-20  xl:pt-0" src="../../asset/img/affiche.jpg"</img>
     <h3 class="text-center p-4">Synopsis</h3>
     <a class="flex text-white bg-[#FDD835]/90 justify-center mx-4 py-1 rounded-full hover:bg-black md:mx-24 md:py-4 lg:mx-48 lg:py-4" href="/trailery/content/pages/film">Regarder&nbsp;le&nbsp;Trailer</a>
